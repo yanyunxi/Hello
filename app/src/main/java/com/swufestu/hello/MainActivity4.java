@@ -2,7 +2,9 @@ package com.swufestu.hello;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -36,10 +38,13 @@ public class MainActivity4 extends AppCompatActivity {
             float rate_dollar = Float.parseFloat(dollar.getText().toString());
             float rate_euro = Float.parseFloat(euro.getText().toString());
             float rate_won = Float.parseFloat(won.getText().toString());
+            SharedPreferences sp= getSharedPreferences("myrate", Activity.MODE_PRIVATE);
+            SharedPreferences.Editor editor=sp.edit();
             Intent intent = new Intent(this,MainActivity3.class);
-            intent.putExtra("dollar_rate",rate_dollar);
-            intent.putExtra("euro_rate",rate_euro);
-            intent.putExtra("won_rate",rate_won);
+            editor.putFloat("dollar_rate",rate_dollar);
+            editor.putFloat("euro_rate",rate_euro);
+            editor.putFloat("won_rate",rate_won);
+            editor.apply();
             startActivity(intent);
         }
         else{
